@@ -1,31 +1,32 @@
 import React from 'react';
 import './header.scss';
-import { BrowserRouter, Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Header = (props) => {
-    const {setCategory} = props;
     return(
         <header className="header">
-            <BrowserRouter>
-                <Link to="/" className="header__title">
-                    <div className="header__title">
-                        <h1 className="header__title--text">Sw Store</h1>
-                    </div>
-                </Link>
-            </BrowserRouter>
+            <Link to="/" className="header__title">
+                <div className="header__title">
+                    <h1 className="header__title--text">Sw Store</h1>
+                </div>
+            </Link>
             <nav className="header__nav">
                 <ul className="nav__list">
-                    <BrowserRouter>
-                        <Link to="/spaceships" className="nav__list--item">
-                            <li>Spaceships</li>
+                    <li  className="nav__list--item">
+                        <Link to="/spaceships" className="nav__list--link">
+                            Spaceships
                         </Link>
-                        <Link to="/vehicles" className="nav__list--item">
-                            <li>Vehicles</li>
+                    </li>
+                    <li  className="nav__list--item">
+                        <Link to="/vehicles" className="nav__list--link">
+                            Vehicles
                         </Link>
-                        <Link to="/planets" className="nav__list--item">
-                            <li>Planets</li>
+                    </li>
+                    <li  className="nav__list--item">
+                        <Link to="/planets" className="nav__list--link">
+                            Planets
                         </Link>
-                    </BrowserRouter>
+                    </li>
                     <li className="nav__list--item">Cart</li>
                 </ul>
             </nav>

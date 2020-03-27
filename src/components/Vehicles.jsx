@@ -4,7 +4,7 @@ import Vehiclecard from './Vehiclecard';
 
 
 const Vehicles = props => {
-  const { setItem } = props;
+  // const { setItem } = props;
   const [isLoading, fetchedData] = useFetch('https://swapi.co/api/vehicles', []);
 
   const vehicles = fetchedData
@@ -20,13 +20,13 @@ const Vehicles = props => {
 
   if (!isLoading && vehicles && vehicles.length > 0) {
     content = (
-        <ol className="vehicles__list">
+        <ul className="vehicles__list articles__list">
             {vehicles.map((vehicle, index) =>
-                <li className="vehicles__list--item" key={index} onClick={setItem}>
+                <li className="vehicles__list--item articles__list--item" key={index}>
                   <Vehiclecard  vehicleId={vehicle.id} vehicleName ={vehicle.name} vehicleUrl={vehicle.url} vehiclePrice={vehicle.price} />
                 </li>
             )}
-        </ol>
+        </ul>
     );
   } else if (
     !isLoading &&

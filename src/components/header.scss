@@ -31,10 +31,12 @@
                 text-transform: uppercase;
                 padding: 12px 0;
                 border: solid 1px lightgrey;
-                color: lightgrey;
-                text-decoration: none;
-                &:hover {
-                    color: black;
+                .nav__list--link {
+                    color: lightgrey;
+                    text-decoration: none;
+                    &:hover {
+                        color: black;
+                    }
                 }
             }
         }

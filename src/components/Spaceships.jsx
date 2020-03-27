@@ -1,9 +1,11 @@
 import React from 'react';
 import { useFetch } from '../hooks/fetch';
 import Spaceshipcard from './Spaceshipcard';
+import './Itemslist.scss';
+import { Link } from 'react-router-dom';
 
 const Spaceships = props => {
-  const { setItem } = props;
+  // const { setItem } = props;
   const [isLoading, fetchedData] = useFetch('https://swapi.co/api/starships/', []);
 
   const spaceships = fetchedData
@@ -20,13 +22,15 @@ const Spaceships = props => {
 
   if (!isLoading && spaceships && spaceships.length > 0) {
     content = (
-        <ol className="spaceships__list">
+        <ul className="spaceships__list articles__list">
             {spaceships.map((ship, index) =>
-                <li className="spaceships__list--item" key={index} onClick={setItem}>
-                    <Spaceshipcard  shipId={ship.id} shipName ={ship.name} shipUrl={ship.url} shipPrice={ship.price} />
+                <li className="spaceships__list--item articles__list--item" id={ship.id}  data-url={ship.url} key={index}>
+                <Link to={`/spaceships/${ship.id}`}>
+                    <Spaceshipcard  shipId={ship.id} shipName ={ship.name} shipPrice={ship.price} />
+                </Link>
                 </li>
             )}
-        </ol>
+        </ul>
     );
   } else if (!isLoading && (!spaceships || spaceships.length === 0)) {
     content = <p>Could not fetch any data.</p>;

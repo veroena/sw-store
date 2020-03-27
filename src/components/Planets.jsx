@@ -4,7 +4,7 @@ import Planetcard from './Planetcard';
 
 
 const Planets = props => {
-  const { setItem } = props;
+  // const { setItem } = props;
   const [isLoading, fetchedData] = useFetch('https://swapi.co/api/planets', []);
 
   const planets = fetchedData
@@ -20,13 +20,13 @@ const Planets = props => {
 
   if (!isLoading && planets && planets.length > 0) {
     content = (
-        <ol className="planets__list">
+        <ul className="planets__list articles__list">
             {planets.map((planet, index) =>
-                <li className="planets__list--item" key={index} onClick={setItem}>
+                <li className="planets__list--item articles__list--item" key={index}>
                     <Planetcard planetName={planet.name} planetId={planet.id} planetUrl={planet.url} planetDiameter={planet.diameter}  />
                 </li>
             )}
-        </ol>
+        </ul>
     );
   } else if (
     !isLoading &&
