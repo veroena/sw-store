@@ -1,0 +1,25 @@
+.articles__list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    padding: 30px;
+    flex-wrap: wrap;
+    margin: 0;
+    background-color: black;
+    .articles__list--item {
+        width: 25%;
+        border: solid 4px grey;
+        background-color: white;
+        border-radius: 12px;
+        margin: 15px;
+        padding: 10px;
+        .articles__list--container {
+            .articles__list--name {
+                font-weight: bold;
+                font-size: 18px;
+            }
+            .articles__list--price {}
+            .articles__list--diameter {}
+        }
+    }
+}

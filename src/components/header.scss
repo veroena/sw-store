@@ -1,0 +1,44 @@
+.header {
+    .header__title {
+        background-color: black;
+        text-decoration: none;
+        .header__title--text {
+            font-family: 'Libre Franklin', sans-serif;
+            font-weight: 900;
+            font-size: 40px;
+            text-transform: uppercase;
+            color: yellow;
+            margin: 0;
+            padding: 20px 0;
+            text-align: center;
+        }
+    }
+    .header__nav {
+        .nav__list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            background-color: #616161;
+            margin: 0;
+            .nav__list--item {
+                flex-grow: 1;
+                text-align: center;
+                vertical-align: middle;
+                font-family: 'Libre Franklin', sans-serif;
+                font-weight: 700;
+                text-transform: uppercase;
+                padding: 12px 0;
+                border: solid 1px lightgrey;
+                .nav__list--link {
+                    color: lightgrey;
+                    text-decoration: none;
+                    &:hover {
+                        color: black;
+                    }
+                }
+            }
+        }
+    }
+}
