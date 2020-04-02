@@ -1,35 +1,57 @@
-import React from 'react';
+import React, {useEffect, useContext}  from 'react';
 import { useFetch } from '../hooks/fetch';
 import Vehiclecard from './Vehiclecard';
+import { Link } from 'react-router-dom';
+import {GlobalContext} from '../common/contexts';
 
 
 const Vehicles = props => {
-  const { setItem } = props;
-  const [isLoading, fetchedData] = useFetch('https://swapi.co/api/vehicles', []);
+  const {state: {vehicles, loading}, dispatch} = useContext(GlobalContext);
+  // const [isLoading, fetchedData] = useFetch('https://swapi.co/api/vehicles', []);
 
-  const vehicles = fetchedData
-    ? fetchedData.results.map((item, index) => ({
-        name: item.name,
-        id: index + 1,
-        url: item.url,
-        price: item.cost_in_credits
-      }))
-    : [];
+
+  useEffect(() => {
+    dispatch({type: 'SET_LOADING'});
+
+    fetch('https://swapi.co/api/vehicles')
+    .then(results => results.json())
+    .then(data => {
+      const vehiclesToSave = data
+        ? data.results.map((item, index) => ({
+            name: item.name,
+            id: index + 1,
+            url: item.url,
+            model: item.model,
+            manufacturer: item.manufacturer,
+            price: item.cost_in_credits,
+            max_speed: item.max_atmosphering_speed,
+            crew: item.crew,
+            passengers: item.passengers,
+            cargo: item.cargo_capacity
+          }))
+        : [];
+
+        dispatch({type: 'SET_VEHICLES', payload: vehiclesToSave})
+    })
+
+  }, [dispatch])
 
   let content = <p>Loading vehicles...</p>;
 
-  if (!isLoading && vehicles && vehicles.length > 0) {
+  if (!loading && vehicles && vehicles.length > 0) {
     content = (
-        <ol className="vehicles__list">
+        <ul className="vehicles__list articles__list">
             {vehicles.map((vehicle, index) =>
-                <li className="vehicles__list--item" key={index} onClick={setItem}>
-                  <Vehiclecard  vehicleId={vehicle.id} vehicleName ={vehicle.name} vehicleUrl={vehicle.url} vehiclePrice={vehicle.price} />
+                <li className="vehicles__list--item articles__list--item" id={vehicle.id} key={index}>
+                  <Link to={`/vehicles/${vehicle.id}`}>
+                    <Vehiclecard  vehicleId={vehicle.id} vehicleName ={vehicle.name} vehicleUrl={vehicle.url} vehiclePrice={vehicle.price} />
+                  </Link>
                 </li>
             )}
-        </ol>
+        </ul>
     );
   } else if (
-    !isLoading &&
+    !loading &&
     (!vehicles || vehicles.length === 0)
   ) {
     content = <p>Could not fetch any data.</p>;
