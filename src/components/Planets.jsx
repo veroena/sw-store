@@ -1,5 +1,5 @@
 import React, {useEffect, useContext}  from 'react';
-import { useFetch } from '../hooks/fetch';
+// import { useFetch } from '../hooks/fetch';
 import Planetcard from './Planetcard';
 import {GlobalContext} from '../common/contexts';
 import { Link } from 'react-router-dom';
@@ -34,7 +34,6 @@ const Planets = props => {
     })
 
   }, [dispatch])
-
 
 
   let content = <p>Loading planets...</p>;

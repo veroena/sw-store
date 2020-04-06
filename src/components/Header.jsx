@@ -27,7 +27,11 @@ const Header = props => {
                             Planets
                         </Link>
                     </li>
-                    <li className="nav__list--item">Cart</li>
+                    <li className="nav__list--item">
+                        <Link to="/cart" className="nav__list--link">
+                            Cart
+                        </Link>
+                    </li>
                 </ul>
             </nav>
         </header>

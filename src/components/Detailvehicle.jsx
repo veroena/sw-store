@@ -1,13 +1,15 @@
 import React, {useContext}  from 'react';
-import {GlobalContext} from '../common/contexts'
+import {GlobalContext} from '../common/contexts';
+import { Link } from 'react-router-dom';
 
 const Detailplanet = props => {
-  const {state: {vehicles, loading}, dispatch} = useContext(GlobalContext);
+  const {state: {vehicles}} = useContext(GlobalContext);
   const id = parseInt(props.match.params.id);
   const vehicle = vehicles.find(item => item.id === id);
   
   return (
-    <div>
+    <div className="detail__container">
+      <Link to="/vehicles">Back</Link>
       {vehicles.length > 0 ?
         <ul className="item__specs">
             <li className="item__detail">{vehicle.name}</li>

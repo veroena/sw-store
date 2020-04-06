@@ -1,18 +1,31 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { AppGlobalProvider } from '../src/common/contexts'
 import './App.scss';
 import Spaceships from './components/Spaceships';
 import Vehicles from './components/Vehicles';
 import Planets from './components/Planets';
-// import Infoitem from './components/Infoitem';
 import Header from './components/Header';
 import Detailplanet from './components/Detailplanet';
 import Detailvehicle from './components/Detailvehicle';
 import Detailspaceship from './components/Detailspaceship';
+import Auction from './components/Auction';
+import Cart from './components/Cart';
 import Home from './components/Home';
 
 const App = props => {
+  const [cart, setCart] = useState([]);
+
+  // useEffect(() => {
+  //   setCart(JSON.parse(localStorage.getItem('id')));
+  // })
+
+
+  const addToCart = (event) => {
+    const itemId = event.currentTarget.id;
+    setCart([...cart, parseInt(itemId)]);
+    localStorage.setItem('id', JSON.stringify([...itemId]));
+  }
 
   return (
       <BrowserRouter>
@@ -25,7 +38,7 @@ const App = props => {
               <Detailspaceship match={props.match}/>)}
             />
             <Route path="/spaceships" render={() => (
-              <Spaceships />)}
+              <Spaceships addToCart={addToCart} />)}
             />
             <Route path="/vehicles/:id" render={ props => (
               <Detailvehicle match={props.match} />)}
@@ -38,6 +51,12 @@ const App = props => {
             />
             <Route path="/planets" render={() => (
               <Planets />)}
+            />
+            <Route path="/auction" render={() => (
+              <Auction />)}
+            />
+            <Route path="/cart" render={() => (
+              <Cart />)}
             />
           </Switch>
         </div>

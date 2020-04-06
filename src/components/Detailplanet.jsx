@@ -1,14 +1,16 @@
 import React, {useContext}  from 'react';
-import {GlobalContext} from '../common/contexts'
+import {GlobalContext} from '../common/contexts';
+import { Link } from 'react-router-dom';
 
 const Detailplanet = props => {
-  const {state: {planets, loading}, dispatch} = useContext(GlobalContext);
+  const {state: {planets}} = useContext(GlobalContext);
   const id = parseInt(props.match.params.id);
   const planet = planets.find(item => item.id === id);
   
 
   return (
-    <div>
+    <div className="detail__container">
+      <Link to="/planets">Back</Link>
       {planets.length > 0 ?
         <ul className="item__specs">
             <li className="item__detail">{planet.name}</li>
@@ -23,6 +25,7 @@ const Detailplanet = props => {
         :
         <p>Could not fetch any data.</p>
       }
+      <Link to="/auction">Buy</Link>
     </div>
   )
 }

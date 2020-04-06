@@ -1,13 +1,13 @@
 import React, {useEffect, useContext}  from 'react';
-import { useFetch } from '../hooks/fetch';
+// import { useFetch } from '../hooks/fetch';
 import Spaceshipcard from './Spaceshipcard';
 import {GlobalContext} from '../common/contexts';
-import { Link } from 'react-router-dom';
 
 import './Itemslist.scss';
 
 const Spaceships = props => {
   const {state: {spaceships, loading}, dispatch} = useContext(GlobalContext);
+  const {addToCart} = props;
   // const [isLoading, fetchedData] = useFetch('https://swapi.co/api/starships/', []);
 
   useEffect(() => {
@@ -44,9 +44,7 @@ const Spaceships = props => {
         <ul className="spaceships__list articles__list">
             {spaceships.map((ship, index) =>
                 <li className="spaceships__list--item articles__list--item" id={ship.id} key={index}>
-                <Link to={`/spaceships/${ship.id}`}>
-                    <Spaceshipcard  shipId={ship.id} shipName ={ship.name} shipPrice={ship.price} />
-                </Link>
+                    <Spaceshipcard  shipId={ship.id} shipName ={ship.name} shipPrice={ship.price} addToCart={addToCart} />
                 </li>
             )}
         </ul>
