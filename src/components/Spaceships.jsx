@@ -1,41 +1,21 @@
-import React, {useEffect, useContext}  from 'react';
-import { useFetch } from '../hooks/fetch';
+import React, { useEffect, useContext }  from 'react';
+import api, { Model } from "../common/api";
 import Spaceshipcard from './Spaceshipcard';
-import {GlobalContext} from '../common/contexts';
+import { GlobalContext } from '../common/contexts';
 import { Link } from 'react-router-dom';
 
 import './Itemslist.scss';
 
+
 const Spaceships = props => {
   const {state: {spaceships, loading}, dispatch} = useContext(GlobalContext);
-  // const [isLoading, fetchedData] = useFetch('https://swapi.co/api/starships/', []);
 
   useEffect(() => {
-    dispatch({type: 'SET_LOADING'});
-
-    fetch('https://swapi.co/api/starships')
-    .then(results => results.json())
-    .then(data => {
-      const spaceshipsToSave = data
-        ? data.results.map((item, index) => ({
-            name: item.name,
-            id: index + 1,
-            url: item.url,
-            model: item.model,
-            manufacturer: item.manufacturer,
-            price: item.cost_in_credits,
-            max_speed: item.max_atmosphering_speed,
-            crew: item.crew,
-            passengers: item.passengers,
-            cargo: item.cargo_capacity
-          }))
-        : [];
-
-        dispatch({type: 'SET_SPACESHIPS', payload: spaceshipsToSave})
-    })
-
-  }, [dispatch])
-
+    if (!spaceships.length) {
+      dispatch({type: 'SET_LOADING'});
+      api(Model.starship, payload => dispatch({type: 'SET_SPACESHIPS', payload}));
+    }
+  }, [spaceships])
 
   let content = <p>Loading spaceships...</p>;
 

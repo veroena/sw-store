@@ -6,7 +6,7 @@ const initialState = {
   planets: [],
   spaceships: [],
   vehicles: [],
-  loading: true
+  loading: false
 }
 
 const reducer = (state, action) => {
@@ -43,6 +43,8 @@ const reducer = (state, action) => {
 
 export const AppGlobalProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+
 
   return (
     <GlobalContext.Provider value={{state, dispatch}}>
