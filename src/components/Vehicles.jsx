@@ -1,40 +1,20 @@
 import React, {useEffect, useContext}  from 'react';
-import { useFetch } from '../hooks/fetch';
+import api, { Model } from '../common/api';
 import Vehiclecard from './Vehiclecard';
-import { Link } from 'react-router-dom';
 import {GlobalContext} from '../common/contexts';
+import { Link } from 'react-router-dom';
 
 
 const Vehicles = props => {
   const {state: {vehicles, loading}, dispatch} = useContext(GlobalContext);
-  // const [isLoading, fetchedData] = useFetch('https://swapi.co/api/vehicles', []);
 
 
   useEffect(() => {
-    dispatch({type: 'SET_LOADING'});
-
-    fetch('https://swapi.co/api/vehicles')
-    .then(results => results.json())
-    .then(data => {
-      const vehiclesToSave = data
-        ? data.results.map((item, index) => ({
-            name: item.name,
-            id: index + 1,
-            url: item.url,
-            model: item.model,
-            manufacturer: item.manufacturer,
-            price: item.cost_in_credits,
-            max_speed: item.max_atmosphering_speed,
-            crew: item.crew,
-            passengers: item.passengers,
-            cargo: item.cargo_capacity
-          }))
-        : [];
-
-        dispatch({type: 'SET_VEHICLES', payload: vehiclesToSave})
-    })
-
-  }, [dispatch])
+    if (!vehicles.length) {
+      dispatch({type: 'SET_LOADING'});
+      api(Model.vehicle, payload => dispatch({type: 'SET_VEHICLES', payload}));
+    }
+  }, [vehicles])
 
   let content = <p>Loading vehicles...</p>;
 

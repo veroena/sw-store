@@ -1,16 +1,15 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { AppGlobalProvider } from '../src/common/contexts'
 import './App.scss';
-import Spaceships from './components/Spaceships';
-import Vehicles from './components/Vehicles';
-import Planets from './components/Planets';
-// import Infoitem from './components/Infoitem';
 import Header from './components/Header';
-import Detailplanet from './components/Detailplanet';
-import Detailvehicle from './components/Detailvehicle';
-import Detailspaceship from './components/Detailspaceship';
 import Home from './components/Home';
+import Spaceships from './components/Spaceships';
+import Detailspaceship from './components/Detailspaceship';
+import Vehicles from './components/Vehicles';
+import Detailvehicle from './components/Detailvehicle';
+import Planets from './components/Planets';
+import Detailplanet from './components/Detailplanet';
 
 const App = props => {
 
